@@ -151,8 +151,8 @@
 			
 			<div class="slides">
 				<section>
-					<h2>Adding a Server-Side Backend to your iOS App</h2>
-					<h3 class="inverted">StackMob &amp; Objective-C</h3>
+					<h2>Adding a Server-Side Backend to your iOS Application</h2>
+					<!-- <h3 class="inverted">StackMob &amp; Objective-C</h3> -->
 					<!-- <p><span style="font-size: 24px;">(uses Backbone.js)</span></p> -->
 					<p style="margin-top: 100px;">
 						<p><a href="http://www.stackmob.com" target="_blank">stackmob.com</a> | <a href="http://www.twitter.com/stackmob">@stackmob</a> | #stackmob</p>
@@ -160,8 +160,9 @@
 					</p>
 				</section>	
 					<section>
-						<h2>@mvaznaian</h2>
-						<h3>Matt Vaznaian</h3>
+						<h2>Matt Vaznaian</h2>
+						<h3>matt@stackmob.com</h3>
+						<h3>@mvaznaian</h3>
 						<p><a href="http://www.stackmob.com"><img src="../images/stackmob_logo.png"/></a></p>
 					</section>
 				  
@@ -169,16 +170,29 @@
 						<h2>A Brief History of Building your backend</h2>
 						
 						<section>
-						oracle or mysql
+						<h3>Database</h3>
+						<img src="https://dl.dropbox.com/u/79464649/oracle.jpg" />
+						<img src="https://dl.dropbox.com/u/79464649/mysql-big.gif" />					
 						</section>
 						
 						<section>
-						
+						<h3>Hardware</h3>
+						<img src="https://dl.dropbox.com/u/79464649/300px-Dell_Logo.svg_1.png" />
+						<img src="https://dl.dropbox.com/u/79464649/intel-logo-300x198.jpg" />
 						</section>
 						
 						<section>
-						
+						<h3>Cloud Store</h3>
+						<img src="https://dl.dropbox.com/u/79464649/amazon.png" />
+						<img src="https://dl.dropbox.com/u/79464649/iCloud.png" />
 						</section>
+						
+						<section>
+						<h3>Software Layer</h3>
+						<img src="https://dl.dropbox.com/u/79464649/heroku.jpg" />
+						<img src="https://dl.dropbox.com/u/79464649/appengine-logo.png" />
+						</section>
+						
 						
 				</section>	
 						
@@ -214,14 +228,14 @@
 				<section>
 				  		<h2>The First App You Ever Built</h2>
 				  		<p>
-				  		(hello world pic)
+				  		<img src="https://dl.dropbox.com/u/79464649/helloWorld.png"/>
 				  		</p>
 				</section>
 				  
 				<section>
 				  		<h2>NSUserDefaults</h2>
 				  		<p>
-				  		(background color and username)
+				  		<img src="https://dl.dropbox.com/u/79464649/helloMatt.png" />
 				  		</p>
 				</section>
 				  
@@ -237,34 +251,20 @@
 				<section>
 						<h2>I could do it myself</h2>
 						
-						(pic reflecting pain of server side)
+						<img src="https://dl.dropbox.com/u/79464649/headInHands.jpg" />
 				</section>
 					
 				<section>
 						<h2>Focus on your user experience!</h2>
 						
-						(pic of nice interface)
-				</section>
-				
-				<section>
-						<h2>REST API</h2>
-						<p>Accessible from any platform</p>
-						<pre><code class="brush: xml">
-						http://api.mob1.stackmob.com/user
-                          ../user/johndoe
-                          ../user?age[gte]=30&age[lte]=50
-                          ../todo
-                          ../yourcustommethod
-						</code></pre>
+						<img src="https://dl.dropbox.com/u/79464649/awesome_note.png" />
 				</section>
 				
 				<section>
 						<h2>Configure StackMob iOS SDK</h2>
 						
-						<h3>Install Using Cocoapods</h3>
-						
+						<h3>StackMobConfiguration.h</h3>
 						<pre><code class="brush: xml">
-						StackMobConfiguration.h
 						#define STACKMOB_PUBLIC_KEY         @"YOUR_PUBLIC_KEY"
 						#define STACKMOB_PRIVATE_KEY        @"YOUR_PRIVATE_KEY"
 						#define STACKMOB_APP_NAME           @"YOUR_APP_NAME"
@@ -273,8 +273,10 @@
 						#define STACKMOB_APP_MOB            @"mob1"
 						#define STACKMOB_USER_OBJECT_NAME   @"user"
 						#define STACKMOB_API_VERSION        0
-
-						AppDelegate.h // or any other file
+						</code></pre>
+						
+						<h3>AppDelegate.h (or any other file)</h3>
+						<pre><code class="brush: xml">
 						#import "StackMob.h"
 						</code></pre>
 				</section>
@@ -283,7 +285,7 @@
 				<section>
 						<h2>Initialize</h2>
 
-						<pre><code class="brush: javascript;">
+						<pre><code class="brush: javascript; highlight: [5]">
 						- (BOOL)application:(UIApplication *)application 
 						didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
 						{
@@ -297,7 +299,7 @@
 						}
 						</code></pre>
 
-						<pre><code class="brush: javascript;">
+						<pre><code class="brush: javascript; highlight: [3]">
 						- (void)applicationWillTerminate:(UIApplication *)application
 						{   
     					[[StackMob stackmob] endSession];
@@ -308,24 +310,92 @@
 					
 										
 				<section>
-					<section>
 						<h2>Server-Side Persistence: Create</h2>
-
-						Syntax:
-
+					<section>
+						<a href="javascript:void(0);">Syntax:</a>
 						<pre><code class="brush: javascript;">
 
 						// define schema
 						NSString *schemaName = @"todo"
 
 						// define field/value pairs and contain in a dictionary
-						NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndKeys:@"Prepare for Appsterdam", @"action", @"high", @"priority"];
+						NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndKeys:
+							@"Prepare for Appsterdam", @"action", @"high", @"priority"];
 
+						[[StackMob stackmob] post:schemaName withArguments:args 
+						andCallback:MyCallback];
+						
+						</code></pre>
+
+					</section>
+					
+					<section>
+							<h2>Let's try it out!</h2>
+					</section>
+						
+					<section>
+						<a href="javascript:void(0);">Syntax:</a>
+						<pre><code class="brush: javascript; highlight: [2]">
+
+						// define schema
+						NSString *schemaName = @"todo"
+
+						// define field/value pairs and contain in a dictionary
+						NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndKeys:
+							@"Prepare for Appsterdam", @"action", @"high", @"priority"];
+
+						[[StackMob stackmob] post:schemaName withArguments:args 
+						andCallback:MyCallback];
+						
+						</code></pre>
+
+					</section>
+					
+					<section>
+						<a href="javascript:void(0);">Syntax:</a>
+						<pre><code class="brush: javascript; highlight: [5, 6]">
+
+						// define schema
+						NSString *schemaName = @"todo"
+
+						// define field/value pairs and contain in a dictionary
+						NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndKeys:
+							@"Prepare for Appsterdam", @"action", @"high", @"priority"];
+
+						[[StackMob stackmob] post:schemaName withArguments:args 
+						andCallback:MyCallback];
+						
+						</code></pre>
+
+					</section>
+					
+					<section>
+						<a href="javascript:void(0);">Syntax:</a>
+						<pre><code class="brush: javascript; highlight: [8, 9]">
+
+						// define schema
+						NSString *schemaName = @"todo"
+
+						// define field/value pairs and contain in a dictionary
+						NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndKeys:
+							@"Prepare for Appsterdam", @"action", @"high", @"priority"];
+
+						[[StackMob stackmob] post:schemaName withArguments:args 
+						andCallback:MyCallback];
+						
+						</code></pre>
+
+					</section>
+						
+					<section>
+						<a href="javascript:void(0);">Callback:</a>
+						<pre><code class="brush: javascript;">
 						[[StackMob stackmob] post:schemaName withArguments:args 
 						andCallback:^(BOOL success, id result){
 						if(success){
                         
-        				// We can get the response body of the newly created object in NSDictionary form 
+        				// We can get the response body of the newly created object 
+        				// in NSDictionary form 
         				NSDictionary *resultDict = (NSDictionary *)result;
         				[self updateUI:resultDict];
                         
@@ -333,15 +403,9 @@
         				// Action after a call results in error
         				}
     					}];
-						}
-
 						</code></pre>
 
 					</section>						
-
-					<section>
-							<h2>Let's try it out!</h2>
-					</section>
 
 
 					<section>
@@ -358,87 +422,54 @@
 				<section>
 						
 					<h2>Read from DB</h2>
-	<a href="javascript:void(0);">Read Item</a>
-	<pre><code class="brush: javascript;">
-NSString *schemaName = @"todo";
-NSString objectId = @"1234";
+					<a href="javascript:void(0);">Read Item</a>
+					<pre><code class="brush: javascript;">
+					NSString *schemaName = @"todo";
+					NSString objectId = @"1234";
 
-[[StackMob stackmob] get:[NSString stringWithFormat:@"%@/%@", schemaName, objectID] 
-	withCallback:^(BOOL success, id result){
-		if(success){
-                        
-        // We can get the response body of the newly created object in NSDictionary form 
-        NSDictionary *resultDict = (NSDictionary *)result;
-        [self updateUI:resultDict];
-                        
-        } else {
-        // Action after a call results in error
-        }
-    }];
-}
+					[[StackMob stackmob] get:[NSString stringWithFormat:@"%@/%@",
+						schemaName, objectID] withCallback:myCallBack];
 	</code></pre>
 						
 				</section>
 				
 				<section>
 					
-						<h2>Update DB</h2>
-						
-						<a href="javascript:void(0);">Update Item</a>
-<pre><code class="brush: javascript;">
-NSString *schemaName = @"todo"
-NSString objectId = @"1234";
+					<h2>Update DB</h2>
+					<a href="javascript:void(0);">Update Item</a>
+					<pre><code class="brush: javascript;">
+					NSString *schemaName = @"todo"
+					NSString objectId = @"1234";
 
-// define field/value pairs and contain in a dictionary
-NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndValues:@"low", @"priority"];
+					// define field/value pairs and contain in a dictionary
+					NSDictionary *args = [[NSDictionary alloc] 
+						initWithObjectsAndValues:@"low", @"priority"];
 
-[[StackMob stackmob] put:schemaName withID:objectId andArguments:args 
-	andCallback:^(BOOL success, id result){
-		if(success){
-                        
-        // We can get the response body of the newly created object in NSDictionary form 
-        NSDictionary *resultDict = (NSDictionary *)result;
-        [self updateUI:resultDict];
-                        
-        } else {
-        // Action after a call results in error
-        }
-    }];
-}
+					[[StackMob stackmob] put:schemaName withID:objectId andArguments:args 
+						andCallback:myCallback];
 </code></pre>
 					
 				</section>
 						
 				<section>
-						<h2>Delete from DB</h2>
-						
-						<a href="javascript:void(0);">Delete Item</a>
-<pre><code class="brush: javascript;">
-NSString *schemaName = @"todo"
+					<h2>Delete from DB</h2>
+					<a href="javascript:void(0);">Delete Item</a>
+					<pre><code class="brush: javascript;">
+					NSString *schemaName = @"todo"
 
-// define field/value pairs and contain in a dictionary
-NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndKeys:@"1234", @"todo_id"];
+					// define field/value pairs and contain in a dictionary
+					NSDictionary *args = [[NSDictionary alloc] 
+						initWithObjectsAndKeys:@"1234", @"todo_id"];
 
-[[StackMob stackmob] destroy:schemaName withArguments:args 
-	andCallback:^(BOOL success, id result){
-		if(success){
-                        
-        // We can get the response body of the newly created object in NSDictionary form 
-        NSDictionary *resultDict = (NSDictionary *)result;
-        [self updateUI:resultDict];
-                        
-        } else {
-        // Action after a call results in error
-        }
-    }];
-}
+					[[StackMob stackmob] destroy:schemaName withArguments:args 
+						andCallback:myCallback];
 </code></pre>
 					
 				</section>
 				
 				<section>
 					<h2>WOOHOO for CRUD!</h2>
-					(pic of homer)
+					<img src="https://dl.dropbox.com/u/79464649/homer_woohoo.jpg" />
 				</section>
 				
 				<section>
@@ -460,24 +491,18 @@ NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndKeys:@"1234", @"tod
 						<h2>Queries</h2>
 						
 						<section>
-						(dr. evil pic)
-						http://uxblog.idvsolutions.com/2011/06/strategies-for-massive-data-sets.html
+						<img src="https://dl.dropbox.com/u/79464649/massiveData_dr-evil.jpg" />
+						
 						</section>
 						
 						<section>
 							<h3>Field Selection</h3>
 							<pre><code class="brush: javascript;">
 							StackMobQuery *q = [StackMobQuery query];
-[q setSelectionToFields:[NSArray arrayWithObjects:@"username", @"age", nil]];
+							[q setSelectionToFields:[NSArray arrayWithObjects:@"username", @"age", nil]];
  
-// perform the query and handle the results
-[[StackMob stackmob] get:@"user" withQuery:q andCallback:^(BOOL success, id result) {
-    if (success) {
-      // cast result to NSArray and process results
-    } else {
-      // cast result to NSError and handle query error
-    }
-}];
+							// perform the query and handle the results
+							[[StackMob stackmob] get:@"user" withQuery:q andCallback:myQueryCallback];
 							</code></pre>
 						</section>
 						
@@ -485,32 +510,21 @@ NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndKeys:@"1234", @"tod
 							<h3>Equality</h3>
 							<pre><code class="brush: javascript;">
 							StackMobQuery *q = [StackMobQuery query];
-[q field:@"age" mustEqualValue:25];
-[[StackMob stackmob] get:@"user" withQuery:q andCallback:^(BOOL success, NSArray *result) {
-    if (success) {
-        // cast result to NSArray and process result
-    } else {
-       // cast result to NSError and handle request error
-    }
-}];
+							[q field:@"age" mustEqualValue:25];
+
+							[[StackMob stackmob] get:@"user" withQuery:q andCallback:myQueryCallback];
 							</code></pre>
 						</section>
 						
 						<section>
 							<h3>Order By</h3>
 							<pre><code class="brush: javascript;">
-						StackMobQuery *q = [StackMobQuery query];
-[q orderByField:@"createddate" withDirection:SMOrderDescending];
-[q orderByField:@"age" withDirection:SMOrderAscending];
+							StackMobQuery *q = [StackMobQuery query];
+							[q orderByField:@"createddate" withDirection:SMOrderDescending];
+							[q orderByField:@"age" withDirection:SMOrderAscending];
  
-// perform the query and handle the results
-[[StackMob stackmob] get:@"user" withQuery:q andCallback:^(BOOL success, id result) {
-    if (success) {
-      // cast result to NSArray and process results
-    } else {
-      // cast result to NSError and handle query error
-    }
-}];
+
+							[[StackMob stackmob] get:@"user" withQuery:q andCallback:myQueryCallback];
 							</code></pre>
 						</section>
 						
@@ -520,40 +534,111 @@ NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndKeys:@"1234", @"tod
 				<section>
 						<h2>Relationships</h2>
 						<section>
-						(holding hands pic)
-						http://freeimagesarchive.com/img12930.search.htm
+						<img src="https://dl.dropbox.com/u/79464649/holdingHands.jpg" />
+						
+						</section>
+						
+						<section>
+							<pre><code class="brush: javascript;">
+							{
+								user: john
+								todos: [1, 2]
+							}
+							</code></pre>
 						</section>
 						
 						<section>
 							<h3>POST - Creating</h3>
+							<pre><code class="brush: javascript; highlight: [1, 2]">
+							NSDictionary *item1 = [NSDictionary dictionaryWithObjectsAndKeys:
+								@"my todo 1", @"action", @"high", @"priority", nil];
+							NSDictionary *item2 = [NSDictionary dictionaryWithObjectsAndKeys:
+								@"my todo 2", @"action", @"low", @"priority", nil];
+							NSArray *items = [NSArray arrayWithObjects:item1, item2, nil];
+
+							[[StackMob stackmob] post:@"user" withId:@"john" andField:@"todos" 
+								andBulkArguments:items andCallback:myCallback];
+							</code></pre>
+						</section>
+						
+						<section>
+							<h3>POST - Creating</h3>
+							<pre><code class="brush: javascript; highlight: [3, 4]">
+							NSDictionary *item1 = [NSDictionary dictionaryWithObjectsAndKeys:
+								@"my todo 1", @"action", @"high", @"priority", nil];
+							NSDictionary *item2 = [NSDictionary dictionaryWithObjectsAndKeys:
+								@"my todo 2", @"action", @"low", @"priority", nil];
+							NSArray *items = [NSArray arrayWithObjects:item1, item2, nil];
+
+							[[StackMob stackmob] post:@"user" withId:@"john" andField:@"todos" 
+								andBulkArguments:items andCallback:myCallback];
+							</code></pre>
+						</section>
+						
+						<section>
+							<h3>POST - Creating</h3>
+							<pre><code class="brush: javascript; highlight: [5]">
+							NSDictionary *item1 = [NSDictionary dictionaryWithObjectsAndKeys:
+								@"my todo 1", @"action", @"high", @"priority", nil];
+							NSDictionary *item2 = [NSDictionary dictionaryWithObjectsAndKeys:
+								@"my todo 2", @"action", @"low", @"priority", nil];
+							NSArray *items = [NSArray arrayWithObjects:item1, item2, nil];
+
+							[[StackMob stackmob] post:@"user" withId:@"john" andField:@"todos" 
+								andBulkArguments:items andCallback:myCallback];
+							</code></pre>
+						</section>
+						
+						<section>
+							<h3>POST - Creating</h3>
+							<pre><code class="brush: javascript; highlight: [7, 8]">
+							NSDictionary *item1 = [NSDictionary dictionaryWithObjectsAndKeys:
+								@"my todo 1", @"action", @"high", @"priority", nil];
+							NSDictionary *item2 = [NSDictionary dictionaryWithObjectsAndKeys:
+								@"my todo 2", @"action", @"low", @"priority", nil];
+							NSArray *items = [NSArray arrayWithObjects:item1, item2, nil];
+
+							[[StackMob stackmob] post:@"user" withId:@"john" andField:@"todos" 
+								andBulkArguments:items andCallback:myCallback];
+							</code></pre>
+						</section>
+						
+						<section>
 							<pre><code class="brush: javascript;">
-						NSDictionary *item1 = [NSDictionary dictionaryWithObjectsAndKeys:@"my todo 1", @"action", nil];
-NSDictionary *item2 = [NSDictionary dictionaryWithObjectsAndKeys:@"my todo 2", @"action", nil];
-NSArray *items = [NSArray arrayWithObjects:item1, item2, nil];
-[[StackMob stackmob] post:@"user" withId:@"john" andField:@"todos" andBulkArguments:items andCallback:^(BOOL succces, id result) {
-  if (success) {
-    // operation succeeded, all objects have been inserted and updated
-  } else {
-    // operation failed
-  }
-}];
+							{
+								user: john
+								todos: [1, 2]
+							}
 							</code></pre>
 						</section>
 						
 						<section>
 							<h3>GET - Expansion</h3>
 							<pre><code class="brush: javascript;">
-						StackMobQuery *q = [StackMobQuery query];
-[q setExpandDepth:2];
+							StackMobQuery *q = [StackMobQuery query];
+							[q setExpandDepth:1];
  
-// perform the query and handle the results
-[[StackMob stackmob] get:@"user" withQuery:q andCallback:^(BOOL success, id result) {
-    if (success) {
-      // cast result to NSArray and process results
-    } else {
-      // cast result to NSError and handle query error
-    }
-}];
+							[[StackMob stackmob] get:@"user/john" withQuery:q andCallback:myCallback];
+							</code></pre>
+						</section>
+						
+						<section>
+							<pre><code class="brush: javascript;">
+							{
+								user: john
+								todos: [
+											{
+												todo_id: 1
+												action: "my todo 1"
+												priority: "high"
+											}
+											{
+												todo_id: 2
+												action: "my todo 2"
+												priority: "low"
+											}
+									   ]
+							}
 							</code></pre>
 						</section>
 						
@@ -568,17 +653,12 @@ NSArray *items = [NSArray arrayWithObjects:item1, item2, nil];
 						<section>
 							<h3>Create User & Login</h2>
 							<pre><code class="brush: javascript;">
-NSString *username = @"[USERNAME]"
-NSString *password = @"[PASSWORD]"
-NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", password, @"password", nil];
+							NSString *username = @"[USERNAME]"
+							NSString *password = @"[PASSWORD]"
+							NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:
+								username, @"username", password, @"password", nil];
  
-[[StackMob stackmob] loginWithArguments:args andCallback:^(BOOL success, id result) {
-    if (success) {
-        // Login Succeeded
-    } else {
-        // Login Failed
-    }
-}];
+							[[StackMob stackmob] loginWithArguments:args andCallback:loginCallback];
 							</code></pre>			
 						</section>
 						
@@ -589,8 +669,9 @@ NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:username, @"user
 								<li>Reset Password</li>
 							</ul>
 						
+						</section>
 				</section>
-						
+				<!--		
 				<section>
 						<h2>Security &rarr; OAuth 2.0</h2>
 					
@@ -602,7 +683,7 @@ NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:username, @"user
 					</ul>
 					
 				</section>
-					
+					-->
 				<section>
 						<h2>Access Controls</h2>
 						<ul>
@@ -610,8 +691,8 @@ NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:username, @"user
 							<li>Limit visibility</li>
 							<li>Coming very very soon</li>
 						</ul>
-					</section>
 				</section>
+				
 				
 				<section>
 					
@@ -620,31 +701,29 @@ NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:username, @"user
 						<ul>
 							<li>Java/Scala Server Side SDK</li>
 							<li>Write Code - StackMob REST-ifies it</li>
-							<li>JS can execute server code via REST API!</li>
-							<li>JS receives your custom JSON response too</li>
+							<li>iOS can execute server code via REST API!</li>
+							<li>iOS receives your custom JSON response too</li>
 						</ul>
-						
-						<p style="margin-top: 30px;">Or include us in NodeJS</p>
 					</section>
+					
 					<section>
-						<h2>Call Custom Code from JS!</h2>
-<pre><code class="brush: javascript;">
-StackMob.customcode('helloworld', {
-	success: function(result) {
-		console.debug(result.toJSON())
-		// Prints { msg: 'Hello World!' }
-	}, 
-	error: function(result) {}
-});	
-</code></pre>						
-					</section>						
+						<h2>Call Custom Code from iOS App!</h2>
+						<pre><code class="brush: javascript;">
+						[[StackMob stackmob] get:@"hello_world" withCallback:^(BOOL success, id result) {
+    						if (success) {
+       						 // result is the JSON as an NSDictionary of "msg" vs. "Hello, world!"
+    						} else {
+    						}
+						}];
+						</code></pre>						
+					</section>
+											
 					<section>
 						<h2>Custom Code Example</h2>
 						
 <pre><code class="brush: java">
 //Java
-public class HelloWorldExample implements 
-								CustomCodeMethod {
+public class HelloWorldExample implements CustomCodeMethod {
   
   @Override
   public String getMethodName() {
@@ -664,13 +743,13 @@ public class HelloWorldExample implements
 }
 </code></pre>						
 					</section>	
+					
 					<section>
 						<h2>Defines your REST endpoint</h2>
 						<p><code>http://api.mob1.stackmob.com/hello_world</code></p>
-<pre><code class="brush: java; highlight: [7]">
+<pre><code class="brush: java; highlight: [6]">
 //Java
-public class HelloWorldExample implements 
-								CustomCodeMethod {
+public class HelloWorldExample implements CustomCodeMethod {
   
   @Override
   public String getMethodName() {
@@ -680,14 +759,14 @@ public class HelloWorldExample implements
   ...
 }
 </code></pre>							
-					</section>	
+					</section>
+						
 					<section>
 						<h2>Defines your return JSON</h2>
 						<p><code>{ msg: "hello world!" }</code></p>
-<pre><code class="brush: java; highlight: [12]">
+<pre><code class="brush: java; highlight: [11]">
 //Java
-public class HelloWorldExample implements 
-								CustomCodeMethod {
+public class HelloWorldExample implements CustomCodeMethod {
   ...
    @Override
   public ResponseToProcess execute(...) {
@@ -701,7 +780,8 @@ public class HelloWorldExample implements
   }
 }
 </code></pre>							
-					</section>		
+					</section>	
+						
 				</section>
 				
 				<section>
@@ -716,7 +796,7 @@ public class HelloWorldExample implements
 				<section>
 					<h2>API Versions</h2>
 					<ul>
-						<li>Backwards support old clients (PhoneGap)</li>
+						<li>Backwards support old clients</li>
 						<li>Concurrently run different versions of your custom code/schemas</li>
 					</ul>
 				</section>
@@ -770,12 +850,8 @@ public class HelloWorldExample implements
 				
 				<section>
 						<h2>The future of the iOS SDK</h2>
-						
-						<ul>
-							<li>Offline Caching?</li>
-							<li>Model API?</li>
-							<li>Core Data Sync?</li>
-						</ul>	
+						<img src="https://dl.dropbox.com/u/79464649/future.jpg" />
+							
 				</section>
 				
 					
@@ -783,21 +859,9 @@ public class HelloWorldExample implements
 					<h2>Resources</h2>
 					<ul>
 						<li><a href="https://www.stackmob.com/signup" target="_blank">Get a Free Account</a></li>
-						<li><a href="http://www.stackmob.com/devcenter/docs/Javascript-SDK-API" target="_blank">StackMob JS SDK</a></li>
-						<li><a href="http://www.stackmob.com/devcenter/docs/JS-SDK-Tutorial" target="_blank">StackMob JS Tutorial</a></li>
-						<li><a href="http://www.stackmob.com/devcenter/docs/Datastore-API#|js" target="_blank">All SDK Docs</a></li>
-						<li><a href="http://dev.xings.com/js/sfjs.html" target="_blank">Slides: http://dev.xings.com/js/sfjs.html</a></li>				
+						<li><a href="http://www.stackmob.com/devcenter/docs/Datastore-API#|js" target="_blank">iOS SDK Docs</a></li>
+						<li><a href="http://dev.iossdktest.stackmob.stackmobapp.com/ios/appsterdam.html#/" target="_blank">Slides: http://dev.iossdktest.stackmob.stackmobapp.com/ios/appsterdam.html#/</a></li>				
 					</ul>
-					
-				</section>
-				
-					
-				
-				<section>
-					<h2>Training/Office Hours</h2>
-					<h3>Tuesday June 12, 2012</h3>
-					<h3>541 8th st (8th and Bryant)</h3>
-					<h3>2.5 blocks away!</h3>
 					
 				</section>
 				
@@ -805,9 +869,11 @@ public class HelloWorldExample implements
 					<h2>Credits</h2>
 					<ul>
 						<li>Reveal.js and Styles - Hakim El Hattab </li>
+						<li>MySQL, Oracle, AWS, Dell, Intel, Google App Engine, Heroku - Google Images</li>
+						<li>Head In Hands, Awesome Note, Dr. Evil, Holding Hands, Future - Google Images</li>
 						<li>Cookie Monster - Sesame Street</li>
-						<li>Todo List Nothing - SpongeBob Squarepants Patrick</li>
 						<li>Calvin &amp; Hobbes - Bill Watterson</li>
+						
 					</ul>
 				</section>
 
