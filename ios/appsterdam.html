@@ -170,6 +170,9 @@
 						<h2>A Brief History of Building your backend</h2>
 						
 						<section>
+						</section>
+						
+						<section>
 						<h3>Database</h3>
 						<img src="https://dl.dropbox.com/u/79464649/oracle.jpg" />
 						<img src="https://dl.dropbox.com/u/79464649/mysql-big.gif" />					
@@ -316,11 +319,11 @@
 						<pre><code class="brush: javascript;">
 
 						// define schema
-						NSString *schemaName = @"todo"
+						NSString *schemaName = @"blogentry"
 
 						// define field/value pairs and contain in a dictionary
 						NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndKeys:
-							@"Prepare for Appsterdam", @"action", @"high", @"priority"];
+							@"rich text", @"content", nil];
 
 						[[StackMob stackmob] post:schemaName withArguments:args 
 						andCallback:MyCallback];
@@ -338,11 +341,11 @@
 						<pre><code class="brush: javascript; highlight: [2]">
 
 						// define schema
-						NSString *schemaName = @"todo"
+						NSString *schemaName = @"blogentry"
 
 						// define field/value pairs and contain in a dictionary
 						NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndKeys:
-							@"Prepare for Appsterdam", @"action", @"high", @"priority"];
+							@"rich text", @"content", nil];
 
 						[[StackMob stackmob] post:schemaName withArguments:args 
 						andCallback:MyCallback];
@@ -356,11 +359,11 @@
 						<pre><code class="brush: javascript; highlight: [5, 6]">
 
 						// define schema
-						NSString *schemaName = @"todo"
+						NSString *schemaName = @"blogentry"
 
 						// define field/value pairs and contain in a dictionary
 						NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndKeys:
-							@"Prepare for Appsterdam", @"action", @"high", @"priority"];
+							@"rich text", @"content", nil];
 
 						[[StackMob stackmob] post:schemaName withArguments:args 
 						andCallback:MyCallback];
@@ -374,11 +377,11 @@
 						<pre><code class="brush: javascript; highlight: [8, 9]">
 
 						// define schema
-						NSString *schemaName = @"todo"
+						NSString *schemaName = @"blogentry"
 
 						// define field/value pairs and contain in a dictionary
 						NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndKeys:
-							@"Prepare for Appsterdam", @"action", @"high", @"priority"];
+							@"rich text", @"content", nil];
 
 						[[StackMob stackmob] post:schemaName withArguments:args 
 						andCallback:MyCallback];
@@ -424,7 +427,7 @@
 					<h2>Read from DB</h2>
 					<a href="javascript:void(0);">Read Item</a>
 					<pre><code class="brush: javascript;">
-					NSString *schemaName = @"todo";
+					NSString *schemaName = @"blogentry";
 					NSString objectId = @"1234";
 
 					[[StackMob stackmob] get:[NSString stringWithFormat:@"%@/%@",
@@ -438,12 +441,12 @@
 					<h2>Update DB</h2>
 					<a href="javascript:void(0);">Update Item</a>
 					<pre><code class="brush: javascript;">
-					NSString *schemaName = @"todo"
+					NSString *schemaName = @"blogentry"
 					NSString objectId = @"1234";
 
 					// define field/value pairs and contain in a dictionary
 					NSDictionary *args = [[NSDictionary alloc] 
-						initWithObjectsAndValues:@"low", @"priority"];
+						initWithObjectsAndValues:@"some other stuff", @"content"];
 
 					[[StackMob stackmob] put:schemaName withID:objectId andArguments:args 
 						andCallback:myCallback];
@@ -455,11 +458,11 @@
 					<h2>Delete from DB</h2>
 					<a href="javascript:void(0);">Delete Item</a>
 					<pre><code class="brush: javascript;">
-					NSString *schemaName = @"todo"
+					NSString *schemaName = @"blogentry"
 
 					// define field/value pairs and contain in a dictionary
 					NSDictionary *args = [[NSDictionary alloc] 
-						initWithObjectsAndKeys:@"1234", @"todo_id"];
+						initWithObjectsAndKeys:@"1234", @"blogentry_id"];
 
 					[[StackMob stackmob] destroy:schemaName withArguments:args 
 						andCallback:myCallback];
@@ -855,6 +858,11 @@ public class HelloWorldExample implements CustomCodeMethod {
 							
 				</section>
 				
+				<section>
+						<h2>Thank you!</h2>
+						<p><img width="400px" src="../images/stackmob_logo.png"/></p>
+					
+				</section>
 					
 				<section>
 					<h2>Resources</h2>
@@ -876,12 +884,6 @@ public class HelloWorldExample implements CustomCodeMethod {
 						<li>Calvin &amp; Hobbes - Bill Watterson</li>
 						
 					</ul>
-				</section>
-
-				<section>
-						<h2>Thank you!</h2>
-						<p><img width="400px" src="../images/stackmob_logo.png"/></p>
-					
 				</section>
 
 			</div>
